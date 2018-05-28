@@ -1,0 +1,57 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 26, 2018, 11:07:41 PM
+    Author     : b1203
+*/
+.display-none {
+    display:none;
+}
+.video-player, .list-episode, .chaxbox {
+    margin-top: 10px;
+    border: 1px solid rgba(204,204,204,.75);
+}
+
+div .list-episode ul {
+  list-style-type: none;
+}
+
+div .list-episode h5 {
+  font: bold Helvetica, Verdana, sans-serif;
+}
+
+div .list-episode ul {
+  padding-left:0px;  
+  overflow: auto;
+  height: 400px;
+}
+
+div .list-episode li img {
+  width: 100px;
+  float: left;
+  margin: 0 15px 0 0;
+}
+
+div .list-episode li p {
+  font: 200 12px/1.5 -apple-system,BlinkMacSystemFont, Times New Roman, serif;
+}
+
+div .list-episode li {
+  padding: 10px;  
+}
+
+div .list-episode li:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.list-episode .title {
+    padding: 10px;
+    border-bottom: 2px solid #ecbcf5;
+}
+.list-episode span {
+    float: right;
+}
