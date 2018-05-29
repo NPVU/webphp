@@ -3,12 +3,13 @@ var login       = "d6e334799f9a673d";
 var fileID      = "XTF_HzjcVWo";
 var ticket      = "";
 var captcha_url = "";
+var website     = "http://172.16.160.112:8080/";
 
 function getTicket(){
     $("#messageErrorCaptcha").addClass("display-none");
     $("#txtCaptcha").val("");
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://172.16.160.112:8080/webphp/public/services/ticket/" + fileID + "/" + login + "/" + key, false);
+    xhttp.open("GET", website+"webphp/public/services/ticket/" + fileID + "/" + login + "/" + key, false);
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
     console.log(response);
@@ -34,7 +35,7 @@ function getVideo(){
         txtCaptcha = "null";
     }
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://172.16.160.112:8080/webphp/public/services/download/" + fileID + "/" + ticket + "/" + txtCaptcha, false);
+    xhttp.open("GET", website+"webphp/public/services/download/" + fileID + "/" + ticket + "/" + txtCaptcha, false);
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
     console.log(response);
