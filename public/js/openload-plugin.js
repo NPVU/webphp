@@ -1,6 +1,6 @@
 var key         = "bvLaLh9-";
 var login       = "d6e334799f9a673d";
-var fileID      = "wRXaJ75lVtM";
+var fileID      = "XTF_HzjcVWo";
 var ticket      = "";
 var captcha_url = "";
 
@@ -8,11 +8,15 @@ function getTicket(){
     $("#messageErrorCaptcha").addClass("display-none");
     $("#txtCaptcha").val("");
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://192.168.1.6/webphp/public/services/ticket/" + fileID + "/" + login + "/" + key, false);
+    xhttp.open("GET", "http://172.16.160.112:8080/webphp/public/services/ticket/" + fileID + "/" + login + "/" + key, false);
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
     console.log(response);
-    if(captcha_url !== response.result.captcha_url){
+	if(response.result.captcha_url === false){
+		ticket = response.result.ticket;
+		getVideo();
+	} else if((captcha_url !== response.result.captcha_url)){
+		$('#modal-captcha').iziModal('open');
         captcha_url = response.result.captcha_url;
         $("#captcha").attr("src", captcha_url);    
         ticket = response.result.ticket;   
@@ -30,7 +34,7 @@ function getVideo(){
         txtCaptcha = "null";
     }
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://192.168.1.6/webphp/public/services/download/" + fileID + "/" + ticket + "/" + txtCaptcha, false);
+    xhttp.open("GET", "http://172.16.160.112:8080/webphp/public/services/download/" + fileID + "/" + ticket + "/" + txtCaptcha, false);
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
     console.log(response);
