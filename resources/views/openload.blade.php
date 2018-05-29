@@ -7,7 +7,7 @@ and open the template in the editor.
 <html lang="{{ app()->getLocale() }}">
     @include('template.head') 
     <body>        
-        <button onclick="getTicket()" data-izimodal-open="#modal-captcha">view video</button>           
+        <button onclick="getTicket()">view video</button>           
         <div id="modal-captcha" class="display-none" data-izimodal-transitionin="fadeInUp">            
             <div class="modal-body">                
                 <div>
