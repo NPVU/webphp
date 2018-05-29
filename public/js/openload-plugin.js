@@ -72,6 +72,7 @@ function showToast(){
     toastOnce: true,
     target:'.video-control',
     message: '',
+    resetOnHover: true,
     position: 'bottomLeft', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
     progressBarColor: 'rgb(0, 255, 184)',
     buttons: [
