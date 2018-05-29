@@ -10,9 +10,12 @@ and open the template in the editor.
 .display-none {
     display:none;
 }
-.video-player, .list-episode, .chaxbox {
+.list-episode, .chaxbox {
     margin-top: 10px;
     border: 1px solid rgba(204,204,204,.75);
+}
+.video-player {
+    margin-top: 10px;
 }
 
 div .list-episode ul {
@@ -54,4 +57,28 @@ div .list-episode li:hover {
 }
 .list-episode span {
     float: right;
+}
+
+.video-control {
+    position: relative;
+    bottom: 46px;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*background-color: rgba(0,0,0,.5);*/
+    height: 40px;
+}
+
+.video-control .fa, .video-control .fab {
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.video-control .fa:hover, .video-control .fab:hover {
+    cursor: pointer;
+}
+
+.player-control {
+    float: left;
 }

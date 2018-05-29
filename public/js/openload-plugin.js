@@ -3,7 +3,7 @@ var login       = "d6e334799f9a673d";
 var fileID      = "XTF_HzjcVWo";
 var ticket      = "";
 var captcha_url = "";
-var website     = "http://172.16.160.112:8080/";
+var website     = "http://192.168.1.6/";
 
 function getTicket(){
     $("#messageErrorCaptcha").addClass("display-none");
@@ -17,11 +17,11 @@ function getTicket(){
 		ticket = response.result.ticket;
 		getVideo();
 	} else if((captcha_url !== response.result.captcha_url)){
-		$('#modal-captcha').iziModal('open');
-        captcha_url = response.result.captcha_url;
-        $("#captcha").attr("src", captcha_url);    
-        ticket = response.result.ticket;   
-        $("#iconLoadingCaptcha").addClass("display-none");
+            $('#modal-captcha').iziModal('open');
+            captcha_url = response.result.captcha_url;
+            $("#captcha").attr("src", captcha_url);    
+            ticket = response.result.ticket;   
+            $("#iconLoadingCaptcha").addClass("display-none");
     } else {
         $("#iconLoadingCaptcha").removeClass("display-none");
         setTimeout(getTicket,1000);
@@ -53,25 +53,49 @@ function refreshCaptcha(){
     $("#btnRefreshCaptcha").click();
 }
 
+$('#video-player').mousemove(function(){
+    showToast();
+    var toast = document.querySelector('#toastVideoControl');
+    iziToast.progress({}, toast).pause();
+});
+$('#video-player').click(function(){
+    showToast();
+    var toast = document.querySelector('#toastVideoControl');
+    iziToast.progress({}, toast).pause();
+});
 function showToast(){
-    iziToast.info({
-    timeout: 20000,
-    overlay: false,
+    iziToast.show({
+    id:'toastVideoControl',
+    theme: 'dark',
+    icon: 'icon-person',
+    title: 'Điều khiển',
     toastOnce: true,
-    id: 'inputs',
-    zindex: 999,   
-    position: 'center',
-    drag: false,
-    inputs: [
-        ['<img id="toastCaptcha" src="">', 'keydown', function (instance, toast, input, e) {
-            console.info(input.value);
-        }],
-        ['<input id="toastTxtCaptcha" type="text">', 'keyup', function (instance, toast, input, e) {
-            console.info(input.value);
+    target:'.video-control',
+    message: '',
+    position: 'bottomLeft', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+    progressBarColor: 'rgb(0, 255, 184)',
+    buttons: [
+        ['<button><i class="fa fa-play"></i></button>', function (instance, toast) {
+            alert("Hello world!");
         }, true],
-        ['<input type="button" onclick="getVideo()" value="send">', 'click', function (instance, toast, input, e) {
-            
-        }, true]
-    ]
-    });
+        ['<button><i class="fa fa-redo"></i></button>', function (instance, toast) {
+            alert("Hello world!");
+        }, false],
+        ['<button><i class="fa fa-volume-up"></i></button>', function (instance, toast) {
+            alert("Hello world!");
+        }, false],
+        ['<button><i class="fab fa-whmcs"></i></button>', function (instance, toast) {
+            alert("Hello world!");
+        }, false],
+        ['<button><i class="fa fa-expand"></i></button>', function (instance, toast) {
+            alert("Hello world!");
+        }, false]
+    ],
+    onOpening: function(instance, toast){
+        console.info('callback abriu!');
+    },
+    onClosing: function(instance, toast, closedBy){
+        console.info('closedBy: ' + closedBy); // tells if it was closed by 'drag' or 'button'
+    }
+});    
 }

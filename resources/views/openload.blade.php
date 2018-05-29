@@ -18,7 +18,7 @@ and open the template in the editor.
                 <div class="input-group">
                     <input type="text" id="txtCaptcha" class="form-control" placeholder="Nhập mã xác nhận" aria-label="Nhập mã xác nhận" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary fa fa-2x fa-refresh"                                
+                        <button type="button" class="btn btn-outline-secondary fa fa-2x fa-redo-alt"                                
                                 title="Làm mới mã xác nhận" onclick="getTicket()"/>                                                    
                         <button type="button" class="btn btn-outline-secondary fa fa-2x fa-check-circle btn-api-video" title="Xác nhận" onclick="getVideo()"/>                                                                         
                     </div>
@@ -30,7 +30,24 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <div class="video-player">
-                            <video id="video-player" src="" controls="true" width="100%" poster="https://images5.alphacoders.com/294/294635.png"/> 
+                            <video id="video-player" src="" width="100%" poster="{{ asset('img/poster-video.png') }}"></video>                             
+                        </div>
+                        <div class="video-control">
+<!--                            <div class="player-control btn-play ">
+                                <i class="fa fa-play-circle"></i>
+                            </div>
+                            <div class="player-control btn-replay ">
+                                <i class="fa fa-redo-alt"></i>
+                            </div>
+                            <div class="player-control btn-volume">
+                                <i class="fa fa-volume-up"></i>
+                            </div>
+                            <div class="player-control btn-setting">
+                                <i class="fab fa-whmcs"></i>
+                            </div>
+                            <div class="player-control btn-screen">
+                                <i class="fa fa-expand"></i>
+                            </div>-->
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
