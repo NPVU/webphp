@@ -3,7 +3,7 @@ var login       = "d6e334799f9a673d";
 var fileID      = "XTF_HzjcVWo";
 var ticket      = "";
 var captcha_url = "";
-var website     = "http://192.168.1.6/";
+var website     = "http://192.168.1.4/"; 
 
 function getTicket(){
     $("#messageErrorCaptcha").addClass("display-none");
@@ -52,7 +52,7 @@ function getVideo(){
 function refreshCaptcha(){
     $("#btnRefreshCaptcha").click();
 }
-
+/*
 $('#video-player').mousemove(function(){
     showToast();
     var toast = document.querySelector('#toastVideoControl');
@@ -76,8 +76,16 @@ function showToast(){
     position: 'bottomLeft', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
     progressBarColor: 'rgb(0, 255, 184)',
     buttons: [
-        ['<button><i class="fa fa-play"></i></button>', function (instance, toast) {
-            alert("Hello world!");
+        ['<button><i class="btn-video-play fa fa-play"></i></button>', function (instance, toast) {   
+			if(videoID.played){
+				$('.btn-video-play').addClass('fa-pause');
+				$('.btn-video-play').removeClass('fa-play');
+				videoID.pause();
+			} else {
+				$('.btn-video-play').removeClass('fa-pause');
+				$('.btn-video-play').addClass('fa-play');
+				videoID.play();
+			}
         }, true],
         ['<button><i class="fa fa-redo"></i></button>', function (instance, toast) {
             alert("Hello world!");
@@ -100,3 +108,4 @@ function showToast(){
     }
 });    
 }
+*/

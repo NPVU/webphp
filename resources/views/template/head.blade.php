@@ -11,6 +11,7 @@
     <link href="{{ asset('css/iziModal.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/video-player.css') }}" rel="stylesheet" type="text/css" />
     <title><?php echo $title ?></title>        
     <script>
         $(function () {

@@ -7,7 +7,7 @@ and open the template in the editor.
 <html lang="{{ app()->getLocale() }}">
     @include('template.head') 
     <body>        
-        <button onclick="getTicket()">view video</button>           
+        <div onclick="getTicket()" data-toggle="tooltip" title="xem video">view video</div>           
         <div id="modal-captcha" class="display-none" data-izimodal-transitionin="fadeInUp">            
             <div class="modal-body">                
                 <div>
@@ -19,7 +19,8 @@ and open the template in the editor.
                     <input type="text" id="txtCaptcha" class="form-control" placeholder="Nhập mã xác nhận" aria-label="Nhập mã xác nhận" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-outline-secondary fa fa-2x fa-redo-alt"                                
-                                title="Làm mới mã xác nhận" onclick="getTicket()"/>                                                    
+                                title="Làm mới mã xác nhận" onclick="getTicket()"
+                                data-toggle="tooltip"/>                                                    
                         <button type="button" class="btn btn-outline-secondary fa fa-2x fa-check-circle btn-api-video" title="Xác nhận" onclick="getVideo()"/>                                                                         
                     </div>
                 </div>                         
@@ -30,24 +31,37 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <div class="video-player">
-                            <video id="video-player" src="" width="100%" poster="{{ asset('img/poster-video.png') }}"></video>                             
+                            <video id="video-player" width="100%" poster="{{ asset('img/poster-video.png') }}"></video>                             
                         </div>
                         <div class="video-control">
-<!--                            <div class="player-control btn-play ">
-                                <i class="fa fa-play-circle"></i>
+                            <div class="player-control progress-duration-time">                                
                             </div>
-                            <div class="player-control btn-replay ">
-                                <i class="fa fa-redo-alt"></i>
+                            <div class="player-control progress-current-time">                                
                             </div>
-                            <div class="player-control btn-volume">
-                                <i class="fa fa-volume-up"></i>
+                            <div class="control-left">                            
+                                <div class="player-control">
+                                    <i class="btn-play fa fa-play"></i>
+                                </div>
+                                <div class="player-control">
+                                    <i class="btn-replay fa fa-redo-alt" data-toggle="tooltip" title="Replay"></i>
+                                </div>
+                                <div class="player-control btn-volume" data-toggle="tooltip" title="Mute">
+                                    <i class="fa fa-volume-up"></i>
+                                </div>
+                                <div class="player-control" style="color:white">
+                                    <span class="current-time">0:00</span>
+                                    /
+                                    <span class="duration-time">0:00</span>
+                                </div>                                  
                             </div>
-                            <div class="player-control btn-setting">
-                                <i class="fab fa-whmcs"></i>
+                            <div class="control-right">                                
+                                <div class="player-control btn-setting" data-toggle="tooltip" title="Setting">
+                                    <i class="fab fa-whmcs"></i>
+                                </div>
+                                <div class="player-control btn-screen" data-toggle="tooltip" title="Full screen">
+                                    <i class="fa fa-expand"></i>
+                                </div>
                             </div>
-                            <div class="player-control btn-screen">
-                                <i class="fa fa-expand"></i>
-                            </div>-->
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -122,8 +136,9 @@ and open the template in the editor.
              }
          });
          $('#modal-video').iziModal('setTitle', 'Xem video trực tuyến');
-         $('#modal-video').iziModal('setFullscreen', true);
+         $('#modal-video').iziModal('setFullscreen', true);           
     </script>
     
-    <script type="text/javascript" src="{{ asset('js/openload-plugin.js') }}"></script> 
+    <script type="text/javascript" src="{{ asset('js/openload-plugin.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/video-player.js') }}"></script>
 </html>
