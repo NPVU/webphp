@@ -11,6 +11,9 @@ $(document).ready(function(){
         videoID.onplaying = function(){
             progressTime();
         };
+        $('#video-player').click(function(){
+           playVideo();
+        });
         $('#video-player, .video-control').hover(function(){
             $('.video-control').css('z-index', 1000);
         }, function(){
@@ -19,15 +22,7 @@ $(document).ready(function(){
             }            
         });
 	$('.btn-play').click(function(){
-		if(videoID.paused){
-			$('.btn-play').addClass('fa-pause');
-			$('.btn-play').removeClass('fa-play');                    
-			videoID.play();                        
-		} else {
-			$('.btn-play').addClass('fa-play');
-			$('.btn-play').removeClass('fa-pause');
-                        videoID.pause();
-		}
+            playVideo();
 	});
         $('.btn-replay').click(function(){
             videoID.currentTime = 0;
@@ -37,7 +32,27 @@ $(document).ready(function(){
                 videoID.play(); 
             }
         });
+        $('.btn-screen').click(function(){
+            if (videoID.requestFullscreen) {
+            videoID.requestFullscreen();
+            } else if (videoID.mozRequestFullScreen) {
+                videoID.mozRequestFullScreen();
+            } else if (videoID.webkitRequestFullscreen) {
+                videoID.webkitRequestFullscreen();
+            }
+        });        
 });
+function playVideo(){
+    if(videoID.paused){
+	$('.btn-play').addClass('fa-pause');
+	$('.btn-play').removeClass('fa-play');                    
+	videoID.play();                        
+    } else {
+	$('.btn-play').addClass('fa-play');
+	$('.btn-play').removeClass('fa-pause');
+        videoID.pause();
+    }
+}
 function progressTime(){
    $('.current-time').html(fancyTimeFormat(videoID.currentTime));
    $('.progress-current-time').css('width',getRateCurrentPerDuration(videoID.currentTime, videoID.duration));
@@ -47,9 +62,13 @@ function progressTime(){
    }
    if(!videoID.paused){
        console.log('Video is playing ...');
-       setTimeout(progressTime,900);
+       $('.btn-play').addClass('fa-pause');
+       $('.btn-play').removeClass('fa-play');
+       setTimeout(progressTime,100);
    } else {
        console.log('Video is stoped.');
+       $('.btn-play').addClass('fa-play');
+       $('.btn-play').removeClass('fa-pause');
    }
 }
 function fancyTimeFormat(time)

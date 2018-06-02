@@ -3,7 +3,7 @@ var login       = "d6e334799f9a673d";
 var fileID      = "XTF_HzjcVWo";
 var ticket      = "";
 var captcha_url = "";
-var website     = "http://192.168.1.4/"; 
+var website     = "http://192.168.1.6/"; 
 
 function getTicket(){
     $("#messageErrorCaptcha").addClass("display-none");
