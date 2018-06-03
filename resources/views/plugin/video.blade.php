@@ -2,6 +2,12 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="video-player">
         <video id="video-player" width="100%" poster="{{ asset('img/poster-video.png') }}"></video>                             
+        <div class="video-background-loading display-none">
+            <div class="video-loader"></div>
+        </div>
+        <div class="video-background-overlay display-none">
+            
+        </div>
     </div>
     <div class="video-control">
         <div class="player-control progress-duration-time" title="0:20">     

@@ -2,18 +2,20 @@
 var videoID = document.getElementById("video-player");
 $(document).ready(function(){
         videoID.onloadstart = function(){          
-
+            $('.video-background-loading').removeClass('display-none');
         };
         videoID.onloadeddata = function() {
+            $('.video-background-loading').addClass('display-none');
+            $('.video-background-overlay').removeClass('display-none');
             $('.duration-time').html(fancyTimeFormat(videoID.duration));
             $('.video-control').css('z-index', 1000);            
-        };
+        };       
         videoID.onplaying = function(){
             progressTime();
         };
-        $('#video-player').click(function(){
+        $('#video-player, .video-background-overlay').click(function(){
            playVideo();
-        });
+        });       
         $('#video-player, .video-control').hover(function(){
             $('.video-control').css('z-index', 1000);
         }, function(){
@@ -91,11 +93,13 @@ $(document).ready(function(){
 function playVideo(){
     if(videoID.paused){
 	$('.btn-play').addClass('fa-pause');
-	$('.btn-play').removeClass('fa-play');                    
+	$('.btn-play').removeClass('fa-play');  
+        $('.video-background-overlay').addClass('display-none');
 	videoID.play();                        
     } else {
 	$('.btn-play').addClass('fa-play');
 	$('.btn-play').removeClass('fa-pause');
+        $('.video-background-overlay').removeClass('display-none');
         videoID.pause();
     }
 }
