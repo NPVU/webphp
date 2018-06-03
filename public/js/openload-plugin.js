@@ -3,7 +3,7 @@ var login       = "d6e334799f9a673d";
 var fileID      = "XTF_HzjcVWo";
 var ticket      = "";
 var captcha_url = "";
-var website     = "http://192.168.1.6/"; 
+var website     = "http://192.168.1.3/"; 
 
 function getTicket(){
     $("#messageErrorCaptcha").addClass("display-none");
@@ -21,6 +21,7 @@ function getTicket(){
             captcha_url = response.result.captcha_url;
             $("#captcha").attr("src", captcha_url);    
             ticket = response.result.ticket;   
+            $("#txtCaptcha").focus();
             $("#iconLoadingCaptcha").addClass("display-none");
     } else {
         $("#iconLoadingCaptcha").removeClass("display-none");
@@ -46,6 +47,7 @@ function getVideo(){
         $('#modal-video').iziModal('open');
     } else {
         $("#messageErrorCaptcha").removeClass("display-none");
+        $("#txtCaptcha").focus();
         return false;
     }  
 }

@@ -7,20 +7,19 @@ and open the template in the editor.
 <html lang="{{ app()->getLocale() }}">
     @include('template.head') 
     <body>        
-        <div onclick="getTicket()" data-toggle="tooltip" title="xem video">view video</div>           
+        <button onclick="getTicket()" title="xem video">view video</button>           
         <div id="modal-captcha" class="display-none" data-izimodal-transitionin="fadeInUp">            
             <div class="modal-body">                
                 <div>
-                    <img id="captcha" src="" alt="captcha" data-toggle="tooltip" data-placement="right" title="Mã xác nhận" width="25%"/> 
-                    <i id="iconLoadingCaptcha" class="fa fa-refresh fa-spin display-none" data-toggle="tooltip" data-placement="top" title="Loading..."></i>                                                   
+                    <img id="captcha" src="" alt="captcha" title="Mã xác nhận" width="25%"/> 
+                    <i id="iconLoadingCaptcha" class="fa fa-sync-alt fa-spin display-none" title="Loading..."></i>                                                   
                     <label id="messageErrorCaptcha" class="text-danger display-none">Mã xác nhận không đúng, vui lòng nhập lại !</label>
                 </div>
                 <div class="input-group">
                     <input type="text" id="txtCaptcha" class="form-control" placeholder="Nhập mã xác nhận" aria-label="Nhập mã xác nhận" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-outline-secondary fa fa-2x fa-redo-alt"                                
-                                title="Làm mới mã xác nhận" onclick="getTicket()"
-                                data-toggle="tooltip"/>                                                    
+                                title="Làm mới mã xác nhận" onclick="getTicket()"/>                                                    
                         <button type="button" class="btn btn-outline-secondary fa fa-2x fa-check-circle btn-api-video" title="Xác nhận" onclick="getVideo()"/>                                                                         
                     </div>
                 </div>                         
@@ -28,9 +27,15 @@ and open the template in the editor.
         </div>
         <div id="modal-video" class="display-none" data-izimodal-transitionin="fadeInDown">
             <div class="modal-body">
-                @include('plugin.video')
+                <div class="row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                    <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8">
+                        @include('plugin.video')
+                    </div>
+                </div>
             </div>
-        </div>        
+        </div> 
+        
     </body>   
     
     <script>                        
