@@ -169,3 +169,9 @@ function calculatorVolume(e){
     var widthMouse = e.pageX - $('.volume-panel').offset().left;    
     return widthMouse;
 }
+function resetVideo(){
+    $('.duration-time').html('0:00');
+    $('.current-time').html('0:00');
+    $('.progress-current-time').css('width',0);
+    $('.video-background-overlay').addClass('display-none');
+}

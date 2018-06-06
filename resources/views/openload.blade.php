@@ -36,8 +36,7 @@ and open the template in the editor.
             </div>
         </div> 
         
-    </body>   
-    
+    </body>       
     <script>                        
          $('#modal-captcha').iziModal({
              overlayClose:false,
@@ -59,12 +58,15 @@ and open the template in the editor.
              },
              onOpened: function(modal){
                  modal.stopLoading();
+             },
+             onClosing: function(modal){
+                 document.getElementById('video-player').pause();
              }
          });
          $('#modal-video').iziModal('setTitle', 'Xem video trực tuyến');
          $('#modal-video').iziModal('setFullscreen', true);           
     </script>
-    
     <script type="text/javascript" src="{{ asset('js/openload-plugin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/video-player.js') }}"></script>
+    
 </html>

@@ -12,6 +12,7 @@ function getTicket(){
     xhttp.open("GET", website+"webphp/public/services/ticket/" + fileID + "/" + login + "/" + key, false);
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
+    resetVideo();
     console.log(response);
 	if(response.result.captcha_url === false){
 		ticket = response.result.ticket;
