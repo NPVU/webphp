@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/admin', function () {
+    return view('admin/index');
+});
 Route::get('helloword', 'HelloWordController@getHelloWordTitle');
 Route::group(['prefix' => 'services'], function(){
 	Route::get('ticket/{file}/{loginkey}/{apikey}', 'ServicesController@openloadTicketAPI');
