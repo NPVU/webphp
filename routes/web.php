@@ -20,3 +20,7 @@ Route::group(['prefix' => 'services'], function(){
 	Route::get('ticket/{file}/{loginkey}/{apikey}', 'ServicesController@openloadTicketAPI');
 	Route::get('download/{file}/{loginkey}/{apikey}', 'ServicesController@openloadDownloadAPI');	
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
