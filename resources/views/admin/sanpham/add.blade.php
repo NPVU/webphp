@@ -9,12 +9,12 @@
                     <div class="box-body">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="txtTenVideo">Tên video</label>
-                                <input type="text" class="form-control" id="txtTenVideo" placeholder="Nhập vào tên video">
+                                <label for="txtTenSanPham">Tên sản phẩm</label>
+                                <input type="text" class="form-control" id="txtTenVideo" placeholder="Nhập vào tên sản phẩm">
                             </div>
                             <div class="form-group">
-                                <label for="numberTap">Tập</label>
-                                <input type="number" class="form-control" id="numberTap" placeholder="Nhập tập phim">
+                                <label for="txtThongTinSanPham">Thông tin sản phẩm</label>
+                                <input type="text" class="form-control" id="txtThongTinSanPham" placeholder="Nhập vào thông tin sản phẩm">
                             </div>
                         </div>
                         <div class="col-md-6">
