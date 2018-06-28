@@ -6,8 +6,7 @@
             @include('admin.template.left')
             
             <div class="content-wrapper" style="min-height: 946px;">
-                
-                @include('admin.template.contentHeader')
+                                
                 @include($page)
                 
             </div>

@@ -15,6 +15,13 @@ Route::get('/quan-ly/', 'QuanLyController@index');
 
 Route::get('/quan-ly/danh-muc/san-pham/', 'SanPhamController@getDanhSachSanPham');
 
+Route::group(['prefix'=>'/quan-ly/nhan-cong/nhan-vien'],function(){
+    Route::get('/','NhanVienController@index');
+    Route::get('/add','NhanVienController@add');
+    Route::get('/edit','NhanVienController@edit');
+    Route::get('/delete','NhanVienController@delete');
+});
+
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
