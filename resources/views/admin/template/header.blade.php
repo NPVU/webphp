@@ -1,8 +1,8 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{ url('/quan-ly/') }}" class="logo">
+    <a href="{{ url('/') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
+        <span class="logo-mini"><b>LV</b></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b>Admin</b>LTE</span>
     </a>
@@ -212,52 +212,45 @@
                         </li>
                     </ul>
                 </li>
-                <!-- User Account: style can be found in dropdown.less -->
-                <?php if(session('userlogin')) : ?>
+                <!-- User Account: style can be found in dropdown.less -->                
+                @if (Auth::check())
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?php echo session('avatar') ?>" class="user-image" alt="User Image">
+                        <img src="{{ asset('public/img/user.png') }}" class="user-image" alt="User Image" style="background: white">
                         <span class="hidden-xs">
-                            <?php echo session('username');  ?>
+                            {{ Auth::user()->name }}
                         </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?php echo session('avatar') ?>" class="img-circle" alt="User Image">
+                            <img src="{{ asset('public/img/user.png') }}" class="img-circle" alt="User Image" style="background: white">
 
                             <p>
-                               <?php echo session('username');  ?> - Web Developer
+                               {{ Auth::user()->name }} - Web Developer
                                 <small>Member since Nov. 2012</small>
                             </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </li>
+                        </li>                        
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{ url('/quan-ly/tai-khoan') }}" class="btn btn-default btn-flat">Thông tin</a>
                             </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                            <div class="pull-right">                                
+                                <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    Đăng xuất
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
                         </li>
                     </ul>
                 </li>
-                <?php endif; ?>
+                @endif
                 <!-- Control Sidebar Toggle Button -->
                 <li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>

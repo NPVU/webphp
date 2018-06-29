@@ -22,6 +22,13 @@ Route::group(['prefix'=>'/quan-ly/nhan-cong/nhan-vien'],function(){
     Route::get('/delete','NhanVienController@delete');
 });
 
+Route::group(['prefix'=>'/quan-ly/chi-tieu'],function(){
+    Route::get('/','ChiTieuController@index');
+    Route::get('/add','ChiTieuController@add');
+    Route::get('/edit','ChiTieuController@edit');
+    Route::get('/delete','ChiTieuController@delete');
+});
+
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
