@@ -10,6 +10,7 @@
     <link href="{{ asset('public/template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/skins/_all-skins.min.css') }}" rel="stylesheet" type="text/css" />    
+    <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <title><?php echo $title ?></title>
 </head>
