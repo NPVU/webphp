@@ -46,7 +46,7 @@
                     </form>
                     <table class="table table-bordered table-hover">
                         <caption>
-                            <span class="text-left inline">Tổng: <?php echo count($nhanvien); ?> (nhân viên)</span>
+                            <span>Tổng: <?php echo count($nhanvien); ?> / {{$tongnhanvien}} (nhân viên)</span>
                         </caption>
                         <thead>
                             <tr class="bg-primary">
@@ -61,7 +61,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $rowIndex = 0; ?>
+                            <?php 
+                                $rowIndex = 0;
+                                if (isset($_GET['page'])) {
+                                    $rowIndex = ($_GET['page']-1) * 10;
+                                } 
+                            ?>
                             @foreach ($nhanvien as $row)
                             <tr>
                                 <td class="text-center">
@@ -110,29 +115,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer">
-
-                </div>
-                <form action="{{url('/quan-ly/nhan-cong/nhan-vien/')}}" role="form" method="POST">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="_nhanvienID" value="0" id="hiddenNhanVienID" />
-                    <button type="submit" class="btn btn-warning" id="lockButton" name="lockButton" style="display:none;"/>
-                    <button type="submit" class="btn btn-warning" id="unlockButton" name="unlockButton" style="display:none;"/>
-                    <button type="submit" class="btn btn-warning" id="editButton" name="editButton" style="display:none;"/>
-                    <button type="submit" class="btn btn-warning" id="viewButton" name="viewButton" style="display:none;"/>
-                </form>
+                <div class="box-footer text-right">
+                    {!! $nhanvien->links() !!}
+                </div>                
             </div>            
         </div>        
-    </div>
-    <script>
-        function selectRowDelete(nvID, actionCallBack, verify){
-            if(verify){
-                if(!confirm('Xác nhận kết thúc hợp đồng với nhân viên này?')){
-                    return false;
-                }
-            }
-            $('#hiddenNhanVienID').val(nvID);
-            $('#'+actionCallBack).click();
-        }        
-    </script>
+    </div>    
 </section>

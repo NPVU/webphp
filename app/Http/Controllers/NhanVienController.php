@@ -13,20 +13,33 @@ class NhanVienController extends Controller{
         $this->middleware('auth');
     }
     
-    public function index() {
-       $list = DB::table('nhanvien')->where('nhanvien_tinhtrang', '=', 1)->get();
+    public function index($showToastr = '') {
+       // $showToastr = 'success' or 'error' or ... dùng để show iziToastr sau khi submit form
+        
+       // lấy danh sách 10 row và tổng số row dùng cho phân trang
+       $tongnhanvien = DB::table('nhanvien')->where('nhanvien_tinhtrang', '=', 1)->count();
+       $list = DB::table('nhanvien')->where('nhanvien_tinhtrang', '=', 1)->paginate(10);       
+       $data['tongnhanvien'] = $tongnhanvien;
        $data['nhanvien'] =  $list;
        
+       // Khai báo các biến cho input lọc form (khi submit form vẫn giữ được giá trị lọc)
        $data['hotenFilter'] = "";
        $data['cmndFilter'] = "";
        $data['tinhtrangFilter'] = 1;
-        
+       
+       // title trang
        $data['title'] = 'Quản Lý Nhân Viên - '.config('constants.company_name');
+       
+       // đường dân file để include vào layout (dấu '.' thay cho '/')
        $data['page'] = 'admin.nhancong.nhanvien.index';
+              
+       $data['showToastr'] = $showToastr;
        return view('admin/layout', $data);
     }
     
-    public function actionIndex(Request $request){        
+    public function actionIndex(Request $request){     
+        
+        // Nếu submit khi nhấn nút tìm (button có name và value = btnFilter)
         if(strcmp($request->btnFilter,'btnFilter') == 0){
             return $this->actionFilter($request);
         }
@@ -47,6 +60,8 @@ class NhanVienController extends Controller{
         if(!parent::nullOrEmptyString($cmndFilter)){
             $where .= " AND nhanvien_cmnd like '%$cmndFilter%' ";
         }
+        
+        // Sử dụng where sql tự viết phải dùng whereRaw
         $list = DB::table('nhanvien')
                 ->whereRaw($where)
                 ->get();
@@ -106,14 +121,26 @@ class NhanVienController extends Controller{
        if(strlen($cmnd) != 9 && strlen($cmnd) != 12) {
            $valid = false;
            $data['msg_error_cmnd'] = "Số CMND phải có 9 hoặc 12 ký tự";
+       } else {
+           $exist = DB::table('nhanvien')->where('nhanvien_cmnd', '=', $cmnd)->count();
+           if($exist != 0){
+               $valid = false;
+               $data['msg_error_cmnd'] = "Số CMND đã tồn tại";
+           }
        }
        
        if($ngaysinh == null) {
            $valid = false;
            $data['msg_error_ngaysinh'] = "Ngày sinh là bắt buộc";
-       }
-       
+       }       
        if($valid){
+            $hinhanh = "";
+            
+            // Nếu có upload file (file có name = hinhanh)
+            if($request->hasFile('hinhanh')){
+                $hinhanh = $this->uploadAvatar($request);
+            }
+            
             DB::table('nhanvien')->insert(
                 [
                     'nhanvien_hoten'        => $hoten,
@@ -123,17 +150,24 @@ class NhanVienController extends Controller{
                     'nhanvien_cmnd'         => $cmnd,
                     'nhanvien_sodienthoai'  => $sodienthoai,
                     'nhanvien_email'        => $email,
-                    'nhanvien_hinhanh'      => '',
+                    'nhanvien_hinhanh'      => $hinhanh,
                     'nhanvien_ngaybatdaulam'=> $request->ngaybatdaulam,
                     'nhanvien_ngaytao'      => date('Y-m-d')
                 ]
             );
-           return $this->index();
+            return $this->index('success');
        } else{
            $data['title'] = 'Thêm Nhân Viên - '.config('constants.company_name');
            $data['page'] = 'admin.nhancong.nhanvien.add';
            return view('admin/layout', $data, $request->all());
        }       
+    } 
+    
+    public function uploadAvatar($request) {
+        // chuyển file về thư mục cần lưu trữ
+        $file = $request->hinhanh;    
+        $newName=time();
+        return $file->move('public/upload/avatar', $newName.'_'.$file->getClientOriginalName());       
     }       
 }
 

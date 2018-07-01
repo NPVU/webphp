@@ -15,5 +15,10 @@
 
             @include('admin.template.setting')
         </div>
+        <script>
+            <?php if(isset($showToastr) && strcmp($showToastr, 'success') == 0) :?>
+                showMessageSuccess();
+            <?php endif;?>
+        </script>
     </body>
 </html>

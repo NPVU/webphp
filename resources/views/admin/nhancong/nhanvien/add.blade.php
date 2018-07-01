@@ -5,7 +5,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Thêm nhân viên</h3>
                 </div>
-                <form role="form" method="POST" action="{{url('/quan-ly/nhan-cong/nhan-vien/them-moi')}}">
+                <form role="form" method="POST" action="{{url('/quan-ly/nhan-cong/nhan-vien/them-moi')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="col-md-1"></div>
@@ -49,6 +49,10 @@
                             <div class="form-group">
                                 <label for="dateBatDauLam">Ngày bắt đầu làm</label>
                                 <input type="date" class="form-control" id="dateBatDauLam" name="ngaybatdaulam" value="{{ $ngaybatdaulam }}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="fileHinhAnh">Hình ảnh</label>
+                                <input type="file" class="form-control" id="fileHinhAnh" name="hinhanh" />
                             </div>
                         </div>
                     </div>
