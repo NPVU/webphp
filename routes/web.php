@@ -18,8 +18,10 @@ Route::get('/quan-ly/danh-muc/san-pham/', 'SanPhamController@getDanhSachSanPham'
 Route::group(['prefix'=>'/quan-ly/nhan-cong/nhan-vien'],function(){
     Route::get('/','NhanVienController@index');
     Route::post('/','NhanVienController@actionIndex');
+    
     Route::get('/them-moi','NhanVienController@preAdd');
     Route::post('/them-moi','NhanVienController@actionAdd');
+    
     Route::get('/edit','NhanVienController@edit');
     Route::get('/delete','NhanVienController@delete');
 });

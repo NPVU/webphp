@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
         DANH SÁCH NHÂN VIÊN
-        <small>Preview</small>
+        <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -17,11 +17,37 @@
                     <h3 class="box-title"></h3>
                     <div class="box-btn-header" style="float:right;">
                         <a href="{{url('/quan-ly/nhan-cong/nhan-vien/them-moi')}}" class="btn btn-danger">Thêm mới</a>
-                    </div>
+                    </div>                    
                 </div>                
                 <div class="box-body">
+                    <form class="box-filter" method="POST" role="form" action="{{url('/quan-ly/nhan-cong/nhan-vien/')}}">
+                        {{ csrf_field() }}
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <label for="txtHoTenFilter">Họ tên</label>
+                                <input type="text" class="form-control" id="txtHoTenFilter" name="hotenFilter" value="{{ $hotenFilter }}" placeholder="Nhập họ tên cần tìm"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="numberCMNDFilter">Số CMND</label>
+                                <input type="number" class="form-control" id="numberCMNDFilter" name="cmndFilter" value="{{ $cmndFilter }}" placeholder="Nhập số CMND cần tìm"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="selectTinhTrangFilter">Tình trạng</label>
+                                <select id="selectTinhTrangFilter" name="tinhtrangFilter" class="form-control">
+                                    <option value="-1" <?php echo $tinhtrangFilter==-1?'selected':'' ?>>Tất cả</option>
+                                    <option value="1" <?php echo $tinhtrangFilter==1?'selected':'' ?>>Hoạt động</option>
+                                    <option value="0" <?php echo $tinhtrangFilter==0?'selected':'' ?>>Đã khóa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center" style="margin-top:10px">
+                            <button type="submit" name="btnFilter" value="btnFilter" class="btn btn-default fa fa-search"> Tìm</button>                            
+                        </div>
+                    </form>
                     <table class="table table-bordered table-hover">
-                        <caption>Danh sách nhân viên</caption>
+                        <caption>
+                            <span class="text-left inline">Tổng: <?php echo count($nhanvien); ?> (nhân viên)</span>
+                        </caption>
                         <thead>
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 3%">#</th>
@@ -43,7 +69,7 @@
                                 </td>
                                 <td>{{$row->nhanvien_hoten}}</td>
                                 <td><?php echo $row->nhanvien_gioitinh == 1 ? 'Nam' : 'Nữ'; ?></td>
-                                <td class="text-center">{{$row->nhanvien_ngaysinh}}</td>
+                                <td class="text-center"><?php echo date('d/m/Y', strtotime($row->nhanvien_ngaysinh)); ?></td>
                                 <td class="text-center">{{$row->nhanvien_cmnd}}</td>
                                 <td class="text-center">{{$row->nhanvien_sodienthoai}}</td>
                                 <td class="text-center">
@@ -74,6 +100,13 @@
                                 </td>
                             </tr>
                             @endforeach
+                            <?php if($rowIndex == 0) :?>
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    Không tìm thấy dữ liệu
+                                </td>
+                            </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>

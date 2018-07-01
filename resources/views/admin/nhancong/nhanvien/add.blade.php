@@ -34,7 +34,7 @@
                                                         
                              <div class="form-group">
                                 <label for="txtDiaChi">Địa chỉ</label>                                
-                                <textarea class="form-control" id ="txtDiaChi" >{{ $diachi }}</textarea>                                
+                                <textarea class="form-control" id ="txtDiaChi" name="diachi" >{{ $diachi }}</textarea>                                
                             </div>                            
                         </div>
                         <div class="col-md-5">

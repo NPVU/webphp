@@ -14,8 +14,12 @@ class NhanVienController extends Controller{
     }
     
     public function index() {
-       $list = DB::table('nhanvien')->get();
+       $list = DB::table('nhanvien')->where('nhanvien_tinhtrang', '=', 1)->get();
        $data['nhanvien'] =  $list;
+       
+       $data['hotenFilter'] = "";
+       $data['cmndFilter'] = "";
+       $data['tinhtrangFilter'] = 1;
         
        $data['title'] = 'Quản Lý Nhân Viên - '.config('constants.company_name');
        $data['page'] = 'admin.nhancong.nhanvien.index';
@@ -23,9 +27,34 @@ class NhanVienController extends Controller{
     }
     
     public function actionIndex(Request $request){        
-        echo $request->lockButton." - ";
-        echo $request->unlockButton." - ";
-        echo $request->editButton;
+        if(strcmp($request->btnFilter,'btnFilter') == 0){
+            return $this->actionFilter($request);
+        }
+    }
+    
+    public function actionFilter(Request $request){
+        $hotenFilter     = $request->hotenFilter;
+        $cmndFilter      = $request->cmndFilter;
+        $tinhtrangFilter = $request->tinhtrangFilter;
+        if($tinhtrangFilter == -1){
+            $where = " nhanvien_tinhtrang <> $tinhtrangFilter ";
+        } else {
+            $where = " nhanvien_tinhtrang = $tinhtrangFilter ";
+        }
+        if(!parent::nullOrEmptyString($hotenFilter)){
+            $where .= " AND nhanvien_hoten like '%$hotenFilter%' ";
+        }
+        if(!parent::nullOrEmptyString($cmndFilter)){
+            $where .= " AND nhanvien_cmnd like '%$cmndFilter%' ";
+        }
+        $list = DB::table('nhanvien')
+                ->whereRaw($where)
+                ->get();
+
+       $data['nhanvien'] =  $list;
+       $data['title'] = 'Quản Lý Nhân Viên - '.config('constants.company_name');
+       $data['page'] = 'admin.nhancong.nhanvien.index';
+       return view('admin/layout', $data, $request->all());
     }
 
     public function preAdd() {
@@ -62,17 +91,9 @@ class NhanVienController extends Controller{
        $sodienthoai = $request->sodienthoai;
        $email       = $request->email;       
        
-       $data['hoten']               = $hoten;
        $data['msg_error_hoten']     = "";
-       $data['cmnd']                = $cmnd;
        $data['msg_error_cmnd']      = "";
-       $data['gioitinh']            = $gioitinh;
-       $data['ngaysinh']            = $ngaysinh;
        $data['msg_error_ngaysinh']  = "";
-       $data['diachi']              = $diachi;
-       $data['sodienthoai']         = $sodienthoai;
-       $data['email']               = $email;
-       $data['ngaybatdaulam']       = $request->ngaybatdaulam;
        
        if(empty($hoten)){
            $valid = false;
@@ -111,8 +132,8 @@ class NhanVienController extends Controller{
        } else{
            $data['title'] = 'Thêm Nhân Viên - '.config('constants.company_name');
            $data['page'] = 'admin.nhancong.nhanvien.add';
-           return view('admin/layout', $data);
+           return view('admin/layout', $data, $request->all());
        }       
-    }
+    }       
 }
 
