@@ -62,11 +62,10 @@ class NhanVienController extends Controller{
         }
         
         // Sử dụng where sql tự viết phải dùng whereRaw
-        $list = DB::table('nhanvien')
-                ->whereRaw($where)
-                ->get();
-
+       $list = DB::table('nhanvien')->whereRaw($where)->get();
+       $tongnhanvien = DB::table('nhanvien')->whereRaw($where)->count();
        $data['nhanvien'] =  $list;
+       $data['tongnhanvien'] =  $tongnhanvien;
        $data['title'] = 'Quản Lý Nhân Viên - '.config('constants.company_name');
        $data['page'] = 'admin.nhancong.nhanvien.index';
        return view('admin/layout', $data, $request->all());

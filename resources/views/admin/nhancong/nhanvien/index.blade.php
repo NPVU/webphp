@@ -20,7 +20,7 @@
                     </div>                    
                 </div>                
                 <div class="box-body">
-                    <form class="box-filter" method="POST" role="form" action="{{url('/quan-ly/nhan-cong/nhan-vien/')}}">
+                    <form class="box-filter" method="POST" role="form" action="{{url('/quan-ly/nhan-cong/nhan-vien')}}">
                         {{ csrf_field() }}
                         <div class="col-md-12">
                             <div class="col-md-4">
@@ -116,7 +116,9 @@
                     </table>
                 </div>
                 <div class="box-footer text-right">
-                    {!! $nhanvien->links() !!}
+                    <?php if($tongnhanvien != count($nhanvien)) :?>
+                        {{$nhanvien->links()}}
+                    <?php endif; ?>
                 </div>                
             </div>            
         </div>        
