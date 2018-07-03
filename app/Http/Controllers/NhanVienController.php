@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Controller;
-
+use App\Http\Controllers\ClassCommon as ClassCommon;
 
 class NhanVienController extends Controller{
     
@@ -54,10 +54,10 @@ class NhanVienController extends Controller{
         } else {
             $where = " nhanvien_tinhtrang = $tinhtrangFilter ";
         }
-        if(!parent::nullOrEmptyString($hotenFilter)){
+        if(!ClassCommon::nullOrEmptyString($hotenFilter)){
             $where .= " AND nhanvien_hoten like '%$hotenFilter%' ";
         }
-        if(!parent::nullOrEmptyString($cmndFilter)){
+        if(!ClassCommon::nullOrEmptyString($cmndFilter)){
             $where .= " AND nhanvien_cmnd like '%$cmndFilter%' ";
         }
         
