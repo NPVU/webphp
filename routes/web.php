@@ -26,6 +26,12 @@ Route::group(['prefix'=>'/quan-ly/nhan-cong/nhan-vien'],function(){
     Route::get('/delete','NhanVienController@delete');
 });
 
+Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
+    Route::get('/','TaiKhoanController@index');
+    Route::get('/doi-thong-tin','TaiKhoanController@preChangeProfile');
+    Route::get('/doi-mat-khau','TaiKhoanController@preChangePassword');    
+});
+
 Route::group(['prefix'=>'/quan-ly/chi-tieu'],function(){
     Route::get('/','ChiTieuController@index');
     Route::get('/add','ChiTieuController@add');
