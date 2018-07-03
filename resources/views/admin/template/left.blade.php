@@ -7,7 +7,8 @@
                 <img src="{{ asset('public/img/user.png') }}" class="img-circle" alt="User Image" style="background: white">
             </div>
             <div class="pull-left info">
-                <p>{{ Auth::user()->name }}</p>
+                <p><a href="#" data-izimodal-open="#modal-name" class="displayUserName">{{ Auth::user()->name }}</a></p>
+                
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -20,28 +21,7 @@
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>                    
                 </a>                
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-user"></i> 
-                    <span>Quản lý tài khoản</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="{{ url('/quan-ly/tai-khoan/') }}">
-                            <i class="fa fa-circle-o"></i> Thông tin tài khoản
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/quan-ly/tai-khoan/doi-mat-khau') }}">
-                            <i class="fa fa-circle-o"></i> Đổi mật khẩu
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            </li>            
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-list"></i> 

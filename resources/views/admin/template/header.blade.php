@@ -217,7 +217,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('public/img/user.png') }}" class="user-image" alt="User Image" style="background: white">
-                        <span class="hidden-xs">
+                        <span class="hidden-xs displayUserName">
                             {{ Auth::user()->name }}
                         </span>
                     </a>
@@ -227,14 +227,14 @@
                             <img src="{{ asset('public/img/user.png') }}" class="img-circle" alt="User Image" style="background: white">
 
                             <p>
-                               {{ Auth::user()->name }} - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                <span class="displayUserName">{{ Auth::user()->name }}</span> - Quản trị viên
+                                <small>Hoạt động từ 08/2018</small>
                             </p>
                         </li>                        
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ url('/quan-ly/tai-khoan') }}" class="btn btn-default btn-flat">Thông tin</a>
+                                <a href="#" data-izimodal-open="#modal-password" class="btn btn-default btn-flat">Đổi mật khẩu</a>
                             </div>
                             <div class="pull-right">                                
                                 <a class="btn btn-default btn-flat" href="{{ route('logout') }}"

@@ -15,6 +15,7 @@
 
             @include('admin.template.setting')
         </div>
+        @include('admin.template.user')
         <script>
             <?php if(isset($showToastr) && strcmp($showToastr, 'success') == 0) :?>
                 showMessageSuccess();

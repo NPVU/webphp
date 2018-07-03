@@ -12,7 +12,7 @@ class QuanLyController extends Controller{
     }
     
     public function index() {
-       $data['title'] = 'TRANG QUẢN LÝ';
+       $data['title'] = 'Bảng Điều Khiển';
        $data['page'] = 'admin.index';
        return view('admin/layout', $data);
     }
