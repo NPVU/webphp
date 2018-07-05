@@ -49,10 +49,7 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('quan-ly/tai-khoan') }}">
-                                        Thông tin
-                                    </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                    
                                     <a class="dropdown-item" href="{{ url('quan-ly') }}">
                                         Quản lý
                                     </a>

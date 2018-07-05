@@ -217,9 +217,9 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('public/img/user.png') }}" class="user-image" alt="User Image" style="background: white">
-                        <span class="hidden-xs displayUserName">
+<!--                    <span class="hidden-xs displayUserName">
                             {{ Auth::user()->name }}
-                        </span>
+                        </span>-->
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -238,8 +238,7 @@
                             </div>
                             <div class="pull-right">                                
                                 <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     Đăng xuất
                                 </a>
 

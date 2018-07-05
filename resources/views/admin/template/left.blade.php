@@ -9,7 +9,7 @@
             <div class="pull-left info">
                 <p><a href="#" data-izimodal-open="#modal-name" class="displayUserName">{{ Auth::user()->name }}</a></p>
                 
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <span style="font-size:10px"><i class="fa fa-circle text-success"></i> Online</span>
             </div>
         </div>
         

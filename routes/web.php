@@ -29,7 +29,7 @@ Route::group(['prefix'=>'/quan-ly/nhan-cong/nhan-vien'],function(){
 Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/','TaiKhoanController@index');
     Route::get('/doi-ten-hien-thi/{displayUserName}','TaiKhoanController@changeDisplayUserName');
-    Route::get('/doi-mat-khau','TaiKhoanController@preChangePassword');    
+    Route::get('/doi-mat-khau/{oldPassword}/{newPassword}','TaiKhoanController@changePassword');    
 });
 
 Route::group(['prefix'=>'/quan-ly/chi-tieu'],function(){

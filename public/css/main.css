@@ -11,3 +11,6 @@
 .required {
     border-left: 3px red solid;
 }
+.display-none {
+    display:none !important;
+}
