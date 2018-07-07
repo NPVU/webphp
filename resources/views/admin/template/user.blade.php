@@ -1,6 +1,35 @@
+<div id="modal-avatar" data-izimodal-transitionin="fadeInDown">
+    <div class="modal-body">        
+        <div class="row">
+            <div class="col-md-12 form-group notify-change-avatar-error has-error display-none">
+                   <label class="control-label">
+                       <i class="fa fa-times-circle-o"></i>
+                       <span class="msg-change-avatar-error"></span>
+                   </label>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <input type="file" name="avatar" class="form-control display-none" id="selectFileAvatar"/>
+                <div class="boxUpdateAvatar">
+                    <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}" width="100%"
+                         onclick="$('#selectFileAvatar').click()" 
+                         class="img-select-file" id="imgDragDrop" ondrop="onDropFile();" ondrag="true"/>
+                </div>                
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                <button type="button" class="btn btn-danger" >Cập nhật</button>
+            </div>
+        </div>        
+    </div>
+</div>
 <div id="modal-name" data-izimodal-transitionin="fadeInDown">
     <div class="modal-body">        
         <div class="row">
+            <div class="col-md-12 form-group notify-change-display-username-error has-error display-none">
+                   <label class="control-label">
+                       <i class="fa fa-times-circle-o"></i>
+                       <span class="msg-change-display-username-error"></span>
+                   </label>
+            </div>
             <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8">
                 <input type="text" id="txtDisplayUserName" class="form-control" value="{{ Auth::user()->name }}" />
             </div>
@@ -58,14 +87,34 @@
 </div>
 
 
-<script>
-    $('#modal-name').iziModal({
+<script>        
+    $('#modal-avatar').iziModal({
              overlayClose:false,
+             width:500,
              onOpening: function(modal){
                  modal.startLoading();                 
              },
              onOpened: function(modal){
                  modal.stopLoading();                 
+             },
+             onClosing: function(modal){
+                 $('.notify-change-avatar-error').addClass('display-none');                 
+             }
+    });
+    $('#modal-avatar').iziModal('setTitle', 'Thay đổi ảnh đại diện');
+    $('#modal-avatar').iziModal('setTop', 50);
+    
+    $('#modal-name').iziModal({
+             overlayClose:false,
+             onOpening: function(modal){
+                 modal.startLoading();
+                 $('#txtDisplayUserName').val('{{ Auth::user()->name }}');
+             },
+             onOpened: function(modal){
+                 modal.stopLoading();                 
+             },
+             onClosing: function(modal){
+                 $('.notify-change-display-username-error').addClass('display-none');                 
              }
     });
     $('#modal-name').iziModal('setTitle', 'Thay đổi tên hiển thị');
@@ -78,6 +127,13 @@
              },
              onOpened: function(modal){
                  modal.stopLoading();                 
+             },
+             onClosing: function(modal){
+                 $('#oldPassword').val('');$('#newPassword').val('');$('#renewPassword').val('');
+                 $('.notify-change-password-success').addClass('display-none'); 
+                 $('.notify-change-password-error').addClass('display-none');
+                 $('.renew-password').removeClass('has-error');
+                 $('.msg_renewpassword_error').html('');
              }
     });
     $('#modal-password').iziModal('setTitle', 'Thay đổi mật khẩu');
@@ -86,27 +142,28 @@
     function updateDisplayUserName(){       
         $.ajax({
             type: "GET",
-            url: "{{url('/quan-ly/tai-khoan/doi-ten-hien-thi')}}/"+$('#txtDisplayUserName').val(),
+            url: "{{url('/quan-ly/tai-khoan/doi-ten-hien-thi')}}/{{csrf_token()}}/"+$('#txtDisplayUserName').val(),
             success: function (data) {
-              $('.displayUserName').html(data);
-              $('#modal-name').iziModal('close');
+              if(data.status === 1){
+                    $('.displayUserName').html(data.msg);
+                    $('#modal-name').iziModal('close');
+              } else if(data.status === 0){                    
+                    $('.msg-change-display-username-error').html(data.msg);
+                    $('.notify-change-display-username-error').removeClass('display-none');                    
+              }              
             }
         });
     }
     function updateChangePassword(){
         $.ajax({
             type: "GET",
-            url: "{{url('/quan-ly/tai-khoan/doi-mat-khau')}}/"+$('#oldPassword').val()+"/"+$('#newPassword').val(),
+            url: "{{url('/quan-ly/tai-khoan/doi-mat-khau')}}/{{csrf_token()}}/"+$('#oldPassword').val()+"/"+$('#newPassword').val(),
             success: function (data) {
                 console.log(data);
-                if(data.status === 200){
+                if(data.status === 1){
                     $('.notify-change-password-error').addClass('display-none');
                     $('.notify-change-password-success').removeClass('display-none');
-                } else if(data.status === 101){
-                    $('.notify-change-password-success').addClass('display-none');
-                    $('.msg-change-password-error').html(data.msg);
-                    $('.notify-change-password-error').removeClass('display-none');
-                } else if(data.status === 102){
+                } else if(data.status === 0){
                     $('.notify-change-password-success').addClass('display-none');
                     $('.msg-change-password-error').html(data.msg);
                     $('.notify-change-password-error').removeClass('display-none');
