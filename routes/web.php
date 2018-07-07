@@ -30,7 +30,8 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/','TaiKhoanController@index');
     Route::get('/doi-ten-hien-thi/{token}/{displayUserName}','TaiKhoanController@changeDisplayUserName');
     Route::get('/doi-mat-khau/{token}/{oldPassword}/{newPassword}','TaiKhoanController@changePassword');
-    Route::post('/doi-avatar/','TaiKhoanController@uploadAvatar');    
+    Route::post('/upload-avatar','TaiKhoanController@uploadAvatar');
+    Route::get('/doi-avatar/{token}','TaiKhoanController@updateAvatar');    
 });
 
 Route::group(['prefix'=>'/quan-ly/chi-tieu'],function(){

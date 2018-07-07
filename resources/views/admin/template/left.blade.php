@@ -4,8 +4,8 @@
         <!-- Sidebar user panel -->
         <div class="user-panel" style="min-height:60px">
             <div class="pull-left image">
-                <a href="#" data-izimodal-open="#modal-avatar" class="avatar">
-                    <img src="{{ asset('public/img/user.png') }}" class="img-circle" alt="User Image" style="background: white">
+                <a href="#" data-izimodal-open="#modal-avatar">
+                    <img src="{{ Auth::user()->avatar }}" class="avatar img-circle" alt="User Image" style="background: white">
                 </a>
             </div>
             <div class="pull-left info">

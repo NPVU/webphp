@@ -7,16 +7,21 @@
                        <span class="msg-change-avatar-error"></span>
                    </label>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <input type="file" name="avatar" class="form-control display-none" id="selectFileAvatar"/>
-                <div class="boxUpdateAvatar">
-                    <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}" width="100%"
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                    
+                <input type="file" name="avatar" class="form-control display-none" id="selectFileAvatar" onchange="autoUploadFile()"/>
+                <div class="boxUpdateAvatar text-center">
+                    <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}" width="80%"
                          onclick="$('#selectFileAvatar').click()" 
                          class="img-select-file" id="imgDragDrop" ondrop="onDropFile();" ondrag="true"/>
-                </div>                
+                    <div class="boxAvatar">
+                        <img id="imgAfterUpload" class="img-circle" width="100px"/>
+                    </div>                    
+                </div>
+
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                <button type="button" class="btn btn-danger" >Cập nhật</button>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top: 20px">
+                <button type="button" class="btn btn-danger" onclick="updateChangeAvatar();">Cập nhật</button>
+                <button type="button" class="btn btn-primary display-none" id="btnReUploadAvatar" onclick="$('#selectFileAvatar').click()"><i class="fa fa-refresh" ></i> Chọn lại</button>
             </div>
         </div>        
     </div>
@@ -92,7 +97,10 @@
              overlayClose:false,
              width:500,
              onOpening: function(modal){
-                 modal.startLoading();                 
+                modal.startLoading();
+                $('#imgDragDrop').removeClass('display-none');
+                $('#btnReUploadAvatar').addClass('display-none');
+                $('.boxAvatar').addClass('display-none');
              },
              onOpened: function(modal){
                  modal.stopLoading();                 
@@ -107,14 +115,14 @@
     $('#modal-name').iziModal({
              overlayClose:false,
              onOpening: function(modal){
-                 modal.startLoading();
-                 $('#txtDisplayUserName').val('{{ Auth::user()->name }}');
+                 modal.startLoading();                 
              },
              onOpened: function(modal){
                  modal.stopLoading();                 
              },
              onClosing: function(modal){
-                 $('.notify-change-display-username-error').addClass('display-none');                 
+                 $('.notify-change-display-username-error').addClass('display-none');
+                 $('#txtDisplayUserName').val($('.displayUserName').html());
              }
     });
     $('#modal-name').iziModal('setTitle', 'Thay đổi tên hiển thị');
@@ -180,5 +188,44 @@
             $('.renew-password').addClass('has-error');
             $('.msg_renewpassword_error').html('Xác nhận mật khẩu không khớp');
         }
+    }
+    
+    function autoUploadFile(){        
+        var file_data = $('#selectFileAvatar').prop('files')[0];   
+        var form_data = new FormData();                  
+        form_data.append('avatar', file_data);                           
+        $.ajax({
+            url: '{{url("quan-ly/tai-khoan/upload-avatar")}}', // point to server-side PHP script 
+            dataType: 'text',  // what to expect back from the PHP script, if anything
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,                         
+            type: 'post',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(php_script_response){
+                $('#imgDragDrop').addClass('display-none');
+                $('#btnReUploadAvatar').removeClass('display-none');
+                $('#imgAfterUpload').attr('src', php_script_response);
+                $('.boxAvatar').removeClass('display-none');
+            }
+         });
+    }
+    function updateChangeAvatar(){
+        $.ajax({
+            type: "GET",
+            url: "{{url('/quan-ly/tai-khoan/doi-avatar')}}/{{csrf_token()}}",
+            success: function (data) {
+                console.log(data);
+                if(data.status === 1){
+                    $('.avatar').attr('src', data.msg);
+                    $('#modal-avatar').iziModal('close');                    
+                } else if(data.status === 0){
+                    
+                }
+            }
+        });
     }
 </script>

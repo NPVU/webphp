@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 30, 2018 lúc 06:11 PM
+-- Thời gian đã tạo: Th7 07, 2018 lúc 07:53 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.2
 
@@ -39,8 +39,8 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1);
+(7, '2014_10_12_000000_create_users_table', 1),
+(8, '2014_10_12_100000_create_password_resets_table', 1);
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,8 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`nhanvien_id`, `nhanvien_hoten`, `nhanvien_gioitinh`, `nhanvien_ngaysinh`, `nhanvien_diachi`, `nhanvien_cmnd`, `nhanvien_sodienthoai`, `nhanvien_email`, `nhanvien_hinhanh`, `nhanvien_ngaybatdaulam`, `nhanvien_tinhtrang`, `nhanvien_ngaytao`) VALUES
-(1, 'NPVU', 1, '1994-06-07', 'Cần thơ', '37154522', '01677077700', NULL, '', '2018-06-30', 1, '2018-06-30');
+(1, 'NPVU', 1, '1994-06-07', 'Cần thơ', '37154522', '01677077700', NULL, '', '2018-06-30', 1, '2018-06-30'),
+(2, 'test hinh anh', 1, '2018-07-02', NULL, '123456789', NULL, NULL, 'public/upload/avatar/nhanvien\\1530968006_Pokemon-Go-Pikachu-Clip-n-Carry-Cosplay-Pop-up-Poke-Ball-_1.jpg', NULL, 1, '2018-07-07');
 
 -- --------------------------------------------------------
 
@@ -93,6 +94,7 @@ CREATE TABLE `users` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'public/upload/avatar/user/user.png',
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -102,8 +104,8 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'admin@gmail.com', '$2y$10$vPDYtyg9.63Gm07vkV.sC.PgTOuHlWEN4/32xe2tTpWCeXMHOylQ6', 'CtxYaryg7Te3R862UoHsVoi91I5cETTXSYbKQw1TiEIa7jHjZ03sCOnzuMtr', '2018-06-25 05:14:31', '2018-06-25 05:14:31');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Administrator', 'npvucusc@gmail.com', '$2y$10$xfFOsdYGnl.gxWE5n9l59OILOzybuJF15ATDi2FuW813trxQDSWZm', 'public/upload/avatar/user/1530985996_Pokemon-Go-Pikachu-Clip-n-Carry-Cosplay-Pop-up-Poke-Ball-_1.jpg', NULL, '2018-07-07 10:53:08', '2018-07-07 10:53:17');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -142,13 +144,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `nhanvien_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `nhanvien_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

@@ -16,12 +16,12 @@ class TaiKhoanController extends Controller{
     
     public function changeDisplayUserName($token, $displayUserName){
         if(strcmp(Session::token(), $token) == 0){
-        $user = Auth::user();
-        $user->name = $displayUserName;
-        $user->save();
-        $data['status'] = 1;
-        $data['msg'] = $displayUserName;
-        return $data;
+            $user = Auth::user();
+            $user->name = $displayUserName;
+            $user->save();
+            $data['status'] = 1;
+            $data['msg'] = $displayUserName;
+            return $data;
         } else {
             $data['status'] = 0;
             $data['msg'] = 'token session không đúng, vui lòng đăng nhập lại !';
@@ -53,11 +53,31 @@ class TaiKhoanController extends Controller{
         return $data;
     }
     
-    public function uploadAvatar($request) {
-        // chuyển file về thư mục cần lưu trữ
-        $file = $request->avatar;    
-        $newName=time();
-        return $file->move('public/upload/avatar/user', $newName.'_'.$file->getClientOriginalName());       
+    public function uploadAvatar(Request $request) {
+        if($request->hasFile('avatar')){
+            // chuyển file về thư mục cần lưu trữ
+            $file = $request->avatar;    
+            $newName=time();    
+            $filePath = $file->move('public/upload/temp/avatar/user', $newName.'_'.$file->getClientOriginalName());
+            session(['fileAvatarName' => $newName.'_'.$file->getClientOriginalName()]);
+//            Session::set('fileAvatarName', );
+            return $filePath;    
+        }
+    }
+    public function updateAvatar($token){
+        if(strcmp(Session::token(), $token) == 0){
+            $path = 'public/upload/avatar/user/'.Session::get('fileAvatarName');
+            rename('public/upload/temp/avatar/user/'.Session::get('fileAvatarName'), $path);
+            $user = Auth::user();
+            $user->avatar = $path;
+            $user->save();
+            $data['status'] = 1;
+            $data['msg'] = $path;
+            return $data;
+        } else {
+           $data['status'] = 0;
+            return $data;
+        }
     }
 }
 
