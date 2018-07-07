@@ -166,7 +166,7 @@ class NhanVienController extends Controller{
         // chuyển file về thư mục cần lưu trữ
         $file = $request->hinhanh;    
         $newName=time();
-        return $file->move('public/upload/avatar', $newName.'_'.$file->getClientOriginalName());       
+        return $file->move('public/upload/avatar/nhanvien', $newName.'_'.$file->getClientOriginalName());       
     }       
 }
 
