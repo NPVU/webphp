@@ -14,4 +14,12 @@ class ClassCommon extends BaseController
     public static function nullOrEmptyString($str){
         return (!isset($str) || trim($str) === '');
     }
+    
+    public static function getPathUploadAvatar(){
+        return 'public/upload/avatar/';
+    }
+    
+    public static function getPathUploadTemp(){
+        return 'public/upload/temp/';
+    }
 }

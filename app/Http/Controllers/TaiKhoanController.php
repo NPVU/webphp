@@ -58,16 +58,15 @@ class TaiKhoanController extends Controller{
             // chuyển file về thư mục cần lưu trữ
             $file = $request->avatar;    
             $newName=time();    
-            $filePath = $file->move('public/upload/temp/avatar/user', $newName.'_'.$file->getClientOriginalName());
+            $filePath = $file->move(ClassCommon::getPathUploadTemp(), $newName.'_'.$file->getClientOriginalName());
             session(['fileAvatarName' => $newName.'_'.$file->getClientOriginalName()]);
-//            Session::set('fileAvatarName', );
             return $filePath;    
         }
     }
     public function updateAvatar($token){
         if(strcmp(Session::token(), $token) == 0){
-            $path = 'public/upload/avatar/user/'.Session::get('fileAvatarName');
-            rename('public/upload/temp/avatar/user/'.Session::get('fileAvatarName'), $path);
+            $path = ClassCommon::getPathUploadAvatar().Session::get('fileAvatarName');
+            rename(ClassCommon::getPathUploadTemp().Session::get('fileAvatarName'), $path);
             $user = Auth::user();
             $user->avatar = $path;
             $user->save();

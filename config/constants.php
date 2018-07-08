@@ -15,7 +15,5 @@ return [
 
     'company_name' => env('COMPANY_NAME','CHẢ CÁ LÝ VÂN'),
     'company_email' => env('COMPANY_email','contact@acme.inc'),
-
-
 ];
 
